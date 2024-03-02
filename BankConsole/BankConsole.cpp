@@ -5,6 +5,8 @@
 
 using namespace std;
 
+
+//class person
 class Person
 {
 public:
@@ -58,6 +60,7 @@ void searchPerson();
 void viewAllPersons();
 void quit();
 
+//show function
 void showPerson(Person p, int i) {
 	cout << "PERSON FOUND\n\n";
 	cout << "id[" << i << "] \n\n";
@@ -71,6 +74,8 @@ void showPerson(Person p, int i) {
 
 vector<Person> persons;
 
+
+// main
 int main() {
 	signed char choice;
 	system("CLS");
@@ -116,6 +121,7 @@ int main() {
 	return 0;
 }
 
+// add func
 void addPerson() {
 	string firstName, lastName, phoneNumber, address;
 	int age;
@@ -143,14 +149,22 @@ void addPerson() {
 	main();
 }
 
+//delete func
 void deletePerson() {
 	int id;
 	cout << "DELETE PERSON\n\n";
-	cout << "ENTER PERSON ID: ";
-	cin >> id;
-	if (id <= persons.size())
+	if (persons.size() > 0)
 	{
-		persons.erase(persons.begin() + id);
+		cout << "ENTER PERSON ID: ";
+		cin >> id;
+		if (persons.size() < id)
+		{
+			cout << "NO PERSONS TO DELETE\nPress any key to continue . . .";
+		}
+		else {
+			persons.erase(persons.begin() + id);
+			cout << "PERSON DELETED\nPress any key to continue . . .";
+		}
 	}
 	else
 	{
@@ -160,6 +174,7 @@ void deletePerson() {
 	main();
 }
 
+//edit func
 void editPerson() {
 	string par;
 	signed char choice;
@@ -205,6 +220,7 @@ void editPerson() {
 	main();
 }
 
+//search func
 void searchPerson() {
 	signed char choice;
 	string par;
@@ -227,7 +243,7 @@ void searchPerson() {
 	{
 	case '1':
 		cout << "ENTER FIRSTNAME: ";
-		getline(cin, par);
+		cin >> par;
 		for (int i = 0; i < persons.size(); i++)
 		{
 			if (persons[i].getFirstName() == par) {
@@ -277,13 +293,15 @@ void searchPerson() {
 		}
 		break;
 	default:
-		cout << "PERSON NOT FOUND!\n\nPress any key to continue . . .";
-		_getch();
-		main();
+		cout << "PERSON NOT FOUND!\n\n";
 		break;
 	}
+	cout << "Press any key to continue . . .";
+	_getch();
+	main();
 }
 
+// view func
 void viewAllPersons() {
 	cout << "VIEW ALL PERSONS\n\n";
 	for (int i = 0; i < persons.size(); i++)
@@ -301,6 +319,8 @@ void viewAllPersons() {
 	main();
 }
 
+
+// quit func
 void quit() {
 	_exit(1);
 }
